@@ -3,8 +3,11 @@
 ╔═══════════════════════════════════════════════════════════════╗
 ║   KubeXHunt — Kubernetes Security Assessment Tool            ║
 ║   Automated cluster security testing from a compromised pod  ║
-║   Usage: python3 kubexhunt.py [--phase N] [--fast]           ║
-║          [--output FILE] [--no-color] [--kubectl-only]       ║
+║                                                               ║
+║   Author  : Mayank Choubey                                   ║
+║   Version : 1.0.0                                            ║
+║   Usage   : python3 kubexhunt.py [--phase N] [--fast]        ║
+║             [--output FILE] [--no-color] [--kubectl-only]    ║
 ╚═══════════════════════════════════════════════════════════════╝
 """
 
@@ -62,6 +65,8 @@ def banner():
     print(c(C.RED, """║                                                                   ║
 ║         Kubernetes Security Assessment Tool  v1.0.0              ║
 ║         Starting from a Compromised Pod → Full Cluster Audit     ║
+║                                                                   ║
+║         Author: Mayank Choubey                                   ║
 ╚═══════════════════════════════════════════════════════════════════╝
 """))
 
