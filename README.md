@@ -42,10 +42,10 @@
 
 ```bash
 # Download on the compromised pod
-git clone https://github.com/mr-xhunt/kubeXhunt.git
+git clone https://github.com/mr-xhunt/Kubernetest-Assessment.git
 
 # Run full assessment
-cd kubeXhunt
+cd Kubernetest-Assessment
 python3 kubexhunt.py
 ```
 
