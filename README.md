@@ -284,34 +284,34 @@ Output shows new findings (regressions), fixed findings (improvements), and seve
 
 | # | Phase | Focus |
 |---|-------|-------|
-| [0](#-phase-0-pre-assessment-setup) | Pre-Assessment Setup | Confirm RCE, grab SA token, baseline |
-| [1](#-phase-1-pod--container-recon) | Pod & Container Recon | Capabilities, mounts, hostPID, hostNetwork |
-| [2](#-phase-2-cloud-metadata--iam-credentials) | Cloud Metadata & IAM | AWS IMDS, GKE metadata, credential theft |
-| [3](#-phase-3-kubernetes-api-enumeration-via-rbac) | K8s API Enumeration | RBAC exploitation, secret theft, cluster map |
-| [4](#-phase-4-network-recon--lateral-movement) | Network Recon & Lateral Movement | Service discovery, port scan, HTTP pivot |
-| [5](#-phase-5-container-escape) | Container Escape | nsenter, chroot, socket, cgroup |
-| [6](#-phase-6-node-level-compromise) | Node-Level Compromise | Kubelet certs, SA token theft, host files |
-| [7](#-phase-7-cluster-wide-privilege-escalation) | Cluster Privilege Escalation | Cluster-admin, privileged pods, etcd |
-| [8](#-phase-8-persistence-techniques) | Persistence | Backdoor SA, DaemonSet, sidecar injection |
-| [9](#-phase-9-supply-chain--admission-control-gaps) | Supply Chain & Admission | Unsigned images, registry creds, webhook bypass |
-| [10](#-phase-10-eks-specific-tests) | EKS-Specific | aws-auth, IRSA, node IAM, CloudWatch |
-| [11](#-phase-11-gke-specific-tests) | GKE-Specific | Workload Identity, legacy metadata, scopes |
-| [12](#-phase-12-runtime-security-gaps) | Runtime Security Gaps | Tetragon, Falco detection probing |
+| [0](#-phase-0-pre-assessment-setup) | Pre-Assessment Setup | Confirm RCE, grab SA token, auto-configure kubectl in-cluster |
+| [1](#-phase-1-pod--container-recon) | Pod & Container Recon | Capabilities, mounts, hostPID, hostNetwork, runtime detection |
+| [2](#-phase-2-cloud-metadata--iam-credentials) | Cloud Metadata & IAM | AWS IMDS, GKE metadata, credential theft, env var fingerprint |
+| [3](#-phase-3-kubernetes-api-enumeration-via-rbac) | K8s API Enumeration | RBAC exploitation, secret theft, cluster map, impersonation |
+| [4](#-phase-4-network-recon--lateral-movement) | Network Recon & Lateral Movement | Service discovery, port scan, recursive endpoint walk, Istio-aware pivot |
+| [5](#-phase-5-container-escape) | Container Escape | nsenter, chroot, socket, cgroup v1 release_agent |
+| [6](#-phase-6-node-level-compromise) | Node-Level Compromise | Kubelet certs, projected token decode, full permission test on all stolen tokens |
+| [7](#-phase-7-cluster-wide-privilege-escalation) | Cluster Privilege Escalation | Cluster-admin, privileged pods, webhook TCP probe, etcd encryption |
+| [8](#-phase-8-persistence-techniques) | Persistence | Backdoor SA, DaemonSet, CronJob, sidecar injection |
+| [9](#-phase-9-supply-chain--admission-control-gaps) | Supply Chain & Admission | Image signing (webhook + Kyverno CRD fallback), registry catalog pivot, PSS, Kyverno v1/v2 |
+| [10](#-phase-10-eks-specific-tests) | EKS-Specific | aws-auth, IRSA, node IAM, CloudWatch audit |
+| [11](#-phase-11-gke-specific-tests) | GKE-Specific | Workload Identity, legacy metadata, scopes, Dashboard |
+| [12](#-phase-12-runtime-security-gaps) | Runtime Security Gaps | Tetragon/Falco/Kyverno/Istio via pods + CRDs + filesystem, TracingPolicy, exec-from-/tmp |
 | [13](#-phase-13-secrets--sensitive-data) | Secrets & Sensitive Data | Env vars, mounted files, app configs |
-| [14](#-phase-14-dos--resource-exhaustion-proof) | DoS & Resource Exhaustion | Quota gaps, limit absence proof |
-| [15](#-phase-15-cluster-intelligence--cve-detection) | Cluster Intel & CVEs ⭐ | K8s/kernel CVEs, node enum, cluster-wide pod audit |
-| [16](#-phase-16-kubelet-exploitation) | Kubelet Exploitation ⭐ | Anonymous kubelet, credential harvest |
-| [17](#-phase-17-etcd-exposure) | etcd Exposure ⭐ | Unauthenticated etcd, secret dump |
-| [18](#-phase-18-helm--application-secrets) | Helm & App Secrets ⭐ | Helm release decode, imagePullSecrets |
-| [19](#-phase-19-proc-credential-harvesting) | /proc Harvesting ⭐ | Process env harvest, hostPID scanning |
-| [20](#-phase-20-azure-aks) | Azure AKS ⭐ | IMDS, Managed Identity, Workload Identity |
-| [21](#-phase-21-openshift--okd) | OpenShift / OKD ⭐ | SCCs, routes, OAuth, registry |
+| [14](#-phase-14-dos--resource-exhaustion-proof) | DoS & Resource Exhaustion | cgroup v1/v2 limits, ResourceQuota, LimitRange, audit logging (self-managed + EKS CloudWatch) |
+| [15](#-phase-15-cluster-intelligence--cve-detection) | Cluster Intel & CVEs ⭐ | Real CVE version comparison, runc version check, API server public IP, worker node public IPs, node enum with 5-method fallback |
+| [16](#-phase-16-kubelet-exploitation) | Kubelet Exploitation ⭐ | Real node IP via `_get_node_ips()`, anonymous kubelet, /pods credential harvest |
+| [17](#-phase-17-etcd-exposure) | etcd Exposure ⭐ | Real node IP probing, unauthenticated etcd, TLS bypass, secret dump |
+| [18](#-phase-18-helm--application-secrets) | Helm & App Secrets ⭐ | Helm release decode (base64+gzip), imagePullSecrets cluster-wide |
+| [19](#-phase-19-proc-credential-harvesting) | /proc Harvesting ⭐ | Process env harvest, cgroup-based pod PID dedup, hostPID host-only scanning, Redis/ArgoCD capture |
+| [20](#-phase-20-azure-aks) | Azure AKS ⭐ | IMDS, Managed Identity, Workload Identity, azure.json SP creds |
+| [21](#-phase-21-openshift--okd) | OpenShift / OKD ⭐ | SCCs, routes, OAuth, internal registry |
 | [22](#-phase-22-advanced-red-team-techniques) | Advanced Red Team ⭐ | Token audience, DNS poisoning, controller hijack |
-| [23](#-phase-23-real-world-attack-chain-simulation) | Attack Chain Simulation ⭐ | 4 complete attack chain proofs |
-| [24](#-phase-24-stealth--evasion-analysis) | Stealth & Evasion ⭐ | Audit impact, detection gaps |
+| [23](#-phase-23-real-world-attack-chain-simulation) | Attack Chain Simulation ⭐ | 4 complete real-world attack chain proofs |
+| [24](#-phase-24-stealth--evasion-analysis) | Stealth & Evasion ⭐ | Audit impact classification, --no-mutate PASS, runtime tool detection from CTX |
 | [25](#-phase-25-network-plugin--misc) | Network Plugin & Misc ⭐ | CNI, kube-proxy, SA token audit |
-| [26](#-phase-26-diff--reporting) | Diff & Reporting ⭐ | CI/CD diff, regression detection |
-| [↓](#-findings-summary-template) | Findings Template | Severity matrix, EKS vs GKE table |
+| [26](#-phase-26-diff--reporting) | Diff & Reporting ⭐ | CI/CD diff, regression detection, exit code 1 on new CRITICAL/HIGH |
+| [↓](#-findings-summary-template) | Findings Template | Severity matrix, EKS vs GKE vs Azure vs OpenShift table |
 
 ---
 
