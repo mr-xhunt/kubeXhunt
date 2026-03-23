@@ -10,6 +10,14 @@
 
 </div>
 
+---
+
+> Credits to **[Chandrapal Badshah](https://github.com/0xbadshah)** for providing exceptional training on Kubernetes Security, which significantly contributed to the development of this tool and deepened my understanding of Kubernetes security practices.
+
+> Special thanks to **[Payatu](https://github.com/payatu)** for sponsoring and providing access to this training, enabling the research and development behind KubeXHunt.
+
+---
+
 > [!IMPORTANT]
 > **Starting Point:** You have Remote Code Execution (RCE) inside a compromised pod.
 > All commands are executed **from inside that pod** unless stated otherwise.
