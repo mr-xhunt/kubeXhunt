@@ -1,9 +1,12 @@
 <div align="center">
 
-## 🛠️ KubeXHunt — Automated Kubernetes Security Assessment Tool
+> ## 🛠️ KubeXHunt — Post-Compromise Kubernetes Attack Simulation Framework
 
-> KubeXHunt is an open-source Kubernetes security assessment tool designed to help security engineers and penetration testers evaluate the security posture of Kubernetes clusters from an attacker's perspective.
-> KubeXHunt enumerates Kubernetes resources, analyzes configurations, and reports findings in a clear pass/fail format — allowing security teams to quickly identify weaknesses and demonstrate real-world impact without causing destructive changes to the cluster.
+> KubeXHunt is an open-source **post-compromise Kubernetes security assessment framework** designed to simulate real-world attacker behavior from inside a compromised pod.
+>
+> Instead of just scanning for misconfigurations, KubeXHunt **demonstrates actual impact** by validating access, exploiting weaknesses, and chaining findings into complete attack paths.
+>
+> 💡 Think: *BloodHound for Kubernetes + post-exploitation automation*
 
 > **Drop this tool onto any compromised pod and run a full automated assessment of the entire cluster.**
 > Zero external dependencies — pure Python 3 stdlib only. Runs on any pod with Python 3.6+.
@@ -22,6 +25,43 @@
 > **Starting Point:** You have Remote Code Execution (RCE) inside a compromised pod.
 > All commands are executed **from inside that pod** unless stated otherwise.
 > **Philosophy:** Demonstrate impact without destroying — read, enumerate, prove, document.
+
+---
+
+## 🤔 Why KubeXHunt?
+
+Most Kubernetes tools answer:
+> “What is misconfigured?”
+
+KubeXHunt answers:
+> **“What can an attacker actually do with this?”**
+
+| Traditional Tools | KubeXHunt |
+|------------------|----------|
+| Misconfiguration scanning | Post-compromise attack simulation |
+| Static analysis | Real API access validation |
+| Flat findings list | Attack path chaining |
+| Assumes risk | **Proves impact** |
+
+---
+
+💥 In under a minute, KubeXHunt can answer:
+
+- Can I become **cluster-admin**?
+- Can I reach **cloud credentials (IMDS / Workload Identity)**?
+- Can I escape to the **node / host**?
+- Can I pivot across **namespaces / workloads**?
+
+---
+
+## ⚖️ Comparison with Other Tools
+
+| Tool | Focus | Limitation |
+|------|------|-----------|
+| kube-bench | CIS compliance | No exploitation |
+| kube-hunter | External scanning | Limited post-exploitation |
+| kubescape | Misconfig scanning | No attack chaining |
+| **KubeXHunt** | 🔥 Post-compromise attack simulation | Shows real impact |
 
 ---
 
@@ -119,6 +159,31 @@ python3 kubexhunt.py --phase-list
 # Run directly in memory — nothing written to disk
 curl -s https://raw.githubusercontent.com/mr-xhunt/kubeXhunt/refs/heads/main/kubexhunt.py | python3 - --fast
 ```
+
+---
+
+## 🧠 How It Works
+
+KubeXHunt follows a real attacker workflow:
+
+Compromised Pod
+     ↓
+Credential Discovery (SA tokens, env, /proc)
+     ↓
+Kubernetes API Exploitation (RBAC, secrets, workloads)
+     ↓
+Lateral Movement (services, DNS, endpoints)
+     ↓
+Privilege Escalation (privileged pods, host access)
+     ↓
+Node Compromise
+     ↓
+Cloud Pivot (IMDS / IAM / Workload Identity)
+     ↓
+⚔ Attack Path Generation
+
+
+👉 Every step is **validated in real-time**, not assumed.
 
 ---
 
