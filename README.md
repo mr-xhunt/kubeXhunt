@@ -339,26 +339,37 @@ Output shows new findings (regressions), fixed findings (improvements), and seve
 > [!NOTE]
 > Run this first. Sets up variables used throughout every other phase.
 
-```bash
-# Confirm execution context
+```# Confirm execution context
 id && whoami && hostname
 uname -a
 cat /etc/os-release
 
-# Check what we can see
-env | sort
-cat /proc/self/status | grep -E "^Name|^Pid|^PPid|^Cap"
-
-# Grab service account credentials (used in every Phase 3+ test)
+# Grab service account credentials
 TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token 2>/dev/null)
 CACERT=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 NS=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace 2>/dev/null)
-API="https://kubernetes.default"
+API="https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}"
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "Namespace : $NS"
 echo "Token     : $([ -n "$TOKEN" ] && echo "✅ PRESENT" || echo "❌ MISSING")"
+echo "API       : $API"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Configure kubectl with in-cluster credentials (if kubeconfig is empty)
+kubectl config view | grep -q "clusters: null" && {
+  echo "Configuring kubectl from SA token..."
+  kubectl config set-cluster in-cluster \
+    --server=$API \
+    --certificate-authority=$CACERT
+  kubectl config set-credentials $NS-sa --token=$TOKEN
+  kubectl config set-context default \
+    --cluster=in-cluster \
+    --user=$NS-sa \
+    --namespace=$NS
+  kubectl config use-context default
+  echo "✅ kubectl configured"
+}
 ```
 
 <details>
