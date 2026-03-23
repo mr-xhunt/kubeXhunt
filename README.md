@@ -2092,7 +2092,23 @@ python3 kubexhunt.py \
 | **Legacy metadata** | IMDSv1 (disable explicitly) | v1beta1 (off since GKE 1.21) | — | N/A |
 | **Unique attack surface** | aws-auth write | cloud-platform scope | azure.json / SP creds | anyuid SCC assignment |
 
+
 ---
+
+## 🎯 Use Cases
+
+- 🔴 **Red Team / Pentesting**  
+  Simulate real attacker behavior inside compromised pods
+
+- 🔵 **Blue Team / Detection Engineering**  
+  Validate detection coverage and audit logging
+
+- 🟢 **DevSecOps / Platform Teams**  
+  Identify real-world impact of misconfigurations
+
+- 🟣 **CI/CD Security Gates**  
+  Fail builds on newly introduced critical risks
+
 
 <div align="center">
 
