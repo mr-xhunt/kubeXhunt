@@ -1,6 +1,6 @@
 # KubeXHunt: Kubernetes Post-Compromise Security Assessment
 
-[![PyPI](https://github.com/mr-xhunt/kubeX/actions/workflows/release.yml/badge.svg)](https://pypi.org/project/kubexhunt/)
+[![PyPI](https://github.com/mr-xhunt/kubeXhunt/actions/workflows/release.yml/badge.svg)](https://pypi.org/project/kubexhunt/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Author](https://img.shields.io/badge/Author-Mayank%20Choubey-orange.svg)](https://www.python.org/downloads/)
