@@ -37,7 +37,7 @@ But there's a gap: **What happens when you already have code execution inside a 
 
 Existing post-compromise frameworks (Peirates, kube-hunter, BOtB) are 3–5 years old and archived. KubeXHunt fills that void by:
 
-- **Automating real-world attack chains** — not just finding individual vulnerabilities, but chaining them into exploitable paths
+- **Automating real-world attack chains** — not just finding individual vulnerabilities, but chaining them into exploitable path
 - **Providing in-cluster execution** — no kubectl, no API access required; works from a compromised pod
 - **Generating actionable exploitation code** — see the exact shell commands/YAML to move laterally and escalate
 - **Integrating cloud pivoting** — because Kubernetes on EKS/GKE/AKS means compromising the cloud account is the endgame
