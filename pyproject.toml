@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
 authors = [
-    {name = "KubeXHunt Maintainers", email = "maintainers@kubexhunt.io"}
+    {name = "KubeXHunt Maintainers", email = "mayankchoubey507@gmail.com"}
 ]
 keywords = ["kubernetes", "security", "assessment", "red-team", "post-exploitation"]
 classifiers = [
