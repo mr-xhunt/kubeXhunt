@@ -234,20 +234,9 @@ python3 kubexhunt.py --diff previous.json
 
 ## Installation
 
-### Via PyPI (coming soon)
+### Via PyPI 
 ```bash
 pip install kubexhunt
-```
-
-### Via Homebrew (coming soon)
-```bash
-brew install kubexhunt
-```
-
-### Via Krew (kubectl plugin)
-```bash
-kubectl krew install kubexhunt
-kubexhunt scan --output report.json
 ```
 
 ### From Source
