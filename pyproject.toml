@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kubexhunt"
-version = "2.0"
+version = "2.1"
 description = "Kubernetes post-compromise security assessment framework"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}
 authors = [
-    {name = "KubeXHunt Maintainers", email = "mayankchoubey507@gmail.com"}
+    {name = "KubeXHunt Maintainers", email = "maintainers@kubexhunt.io"}
 ]
 keywords = ["kubernetes", "security", "assessment", "red-team", "post-exploitation"]
 classifiers = [

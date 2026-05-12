@@ -5,7 +5,7 @@
 ║   Automated cluster security testing from a compromised pod                 ║
 ║                                                                              ║
 ║   Author  : Mayank Choubey                                                  ║
-║   Version : 1.2.0                                                            ║
+║   Version : 2.1                                                            ║
 ║   Usage   : python3 kubexhunt.py [--phase N] [--fast] [--stealth 0|1|2]    ║
 ║             [--output FILE] [--no-color] [--exploit MODULE]                 ║
 ║             [--no-mutate] [--diff PREV.json] [--proxy URL]                  ║
