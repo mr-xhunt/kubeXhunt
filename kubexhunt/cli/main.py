@@ -6,14 +6,14 @@ import argparse
 
 from kubexhunt.services.scan_service import run_scan
 
-__version__ = "2.0.0"
+__version__ = "2.1"
 
 
 def build_parser() -> argparse.ArgumentParser:
     """Build the CLI parser while preserving legacy flags and help text."""
 
     parser = argparse.ArgumentParser(
-        description="KubeXHunt v2.0.0 — Kubernetes Security Assessment Tool",
+        description="KubeXHunt v2.1 — Kubernetes Security Assessment Tool",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

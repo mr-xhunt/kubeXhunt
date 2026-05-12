@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from datetime import datetime
 
+from kubexhunt import __version__
 from kubexhunt.core.runtime import get_active_runtime
 from kubexhunt.core.legacy import load_legacy_module
 
@@ -23,7 +24,7 @@ def build_report(runtime) -> dict:
 
     return {
         "tool": "KubeXHunt",
-        "version": "1.2.0",
+        "version": __version__,
         "timestamp": datetime.now().isoformat(),
         "context": {
             "api": runtime.CTX.get("api"),
